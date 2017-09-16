@@ -10,8 +10,9 @@ class App extends Component {
   };
 
   componentDidMount() {
-    axios.get('http://localhost:3000?url=http://www.google.com')
-      .then(response => this.setState({ html: response.data.html, summary: response.data.summary }));
+    axios.get('http://localhost:3000?url=www.google.com')
+      .then(response => this.setState({ html: response.data.html, summary: response.data.summary }))
+      .catch(this.setState({ html: 'Please enter a valid URL.' }));
   }
 
   highlightTags(event) {
