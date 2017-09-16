@@ -1,10 +1,12 @@
 import React, { Component } from 'react';
 import axios from 'axios';
+import Highlighter from 'react-highlight-words';
 
 class App extends Component {
   state = {
     html: '',
-    summary: {}
+    summary: {},
+    searchWords: ['title', 'div']
   };
 
   componentDidMount() {
@@ -22,7 +24,10 @@ class App extends Component {
     return (
       <div>
         <pre>
-          {this.state.html}
+          <Highlighter
+            searchWords={this.state.searchWords}
+            textToHighlight={this.state.html}
+          />
         </pre>
         {this.renderSummary()}
       </div>
