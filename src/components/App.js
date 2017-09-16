@@ -4,19 +4,26 @@ import Highlighter from 'react-highlight-words';
 
 class App extends Component {
   state = {
+    url: '',
     html: '',
     summary: {},
     searchWords: []
   };
 
-  componentDidMount() {
-    axios.get('http://localhost:3000?url=www.google.com')
-      .then(response => this.setState({ html: response.data.html, summary: response.data.summary }))
+  handleChange({ target }) {
+    this.setState({ url: target.value });
+  }
+
+  handleSubmit(event) {
+    event.preventDefault();
+
+    axios.get(`http://localhost:3000?url=${this.state.url}`)
+      .then(({ data }) => this.setState({ html: data.html, summary: data.summary }))
       .catch(this.setState({ html: 'Please enter a valid URL.' }));
   }
 
-  highlightTags(event) {
-    this.setState({ searchWords: [`<${event.target.value}`] });
+  highlightTags({ target }) {
+    this.setState({ searchWords: [`<${target.value}`] });
   }
 
   renderSummary() {
@@ -33,6 +40,13 @@ class App extends Component {
   render() {
     return (
       <div>
+        <form onSubmit={this.handleSubmit.bind(this)}>
+          <label>
+            Enter URL:
+            <input type="text" value={this.state.url} onChange={this.handleChange.bind(this)} />
+          </label>
+          <input type="submit" value="Search" />
+        </form>
         <pre>
           <Highlighter
             searchWords={this.state.searchWords}
