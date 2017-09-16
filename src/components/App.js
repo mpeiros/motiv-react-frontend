@@ -19,7 +19,7 @@ class App extends Component {
 
     axios.get(`http://localhost:3000?url=${this.state.url}`)
       .then(({ data }) => this.setState({ html: data.html, summary: data.summary }))
-      .catch(this.setState({ html: 'Please enter a valid URL.' }));
+      .catch(error => this.setState({ html: 'Please enter a valid URL.' }));
   }
 
   highlightTags({ target }) {
