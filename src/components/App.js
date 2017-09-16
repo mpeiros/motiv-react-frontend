@@ -6,7 +6,7 @@ class App extends Component {
   state = {
     html: '',
     summary: {},
-    searchWords: ['title', 'div']
+    searchWords: []
   };
 
   componentDidMount() {
@@ -14,9 +14,18 @@ class App extends Component {
       .then(response => this.setState({ html: response.data.html, summary: response.data.summary }));
   }
 
+  highlightTags(event) {
+    this.setState({ searchWords: [`<${event.target.value}`] });
+  }
+
   renderSummary() {
     return Object.keys(this.state.summary).map(key => {
-      return <p key={key}>{key}: {this.state.summary[key]}</p>;
+      return (
+        <div key={key}>
+          <button onClick={this.highlightTags.bind(this)} value={key}>{key}</button>
+          {this.state.summary[key]}
+        </div>
+      ); 
     });
   }
 
