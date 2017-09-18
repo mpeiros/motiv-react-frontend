@@ -30,7 +30,13 @@ class App extends Component {
     return Object.keys(this.state.summary).map(key => {
       return (
         <div key={key}>
-          <button onClick={this.highlightTags.bind(this)} value={key}>{key}</button>
+          <button 
+            className="waves-effect waves-light btn"
+            onClick={this.highlightTags.bind(this)}
+            value={key}
+          >
+            {key}
+          </button>
           {this.state.summary[key]}
         </div>
       ); 
@@ -40,20 +46,26 @@ class App extends Component {
   render() {
     return (
       <div className="container">
-        <form onSubmit={this.handleSubmit.bind(this)}>
-          <label>
-            Enter URL:
+        <div className="row center-align">
+          <form onSubmit={this.handleSubmit.bind(this)}>
+            <label>Enter URL:</label>
             <input type="text" value={this.state.url} onChange={this.handleChange.bind(this)} />
-          </label>
-          <input type="submit" value="Search" />
-        </form>
-        <pre>
-          <Highlighter
-            searchWords={this.state.searchWords}
-            textToHighlight={this.state.html}
-          />
-        </pre>
-        {this.renderSummary()}
+            <button className="btn waves-effect waves-light" type="submit">Search</button>
+          </form>
+        </div>
+        <div className="row">
+          <div className="col s3">
+            {this.renderSummary()}
+          </div>
+          <div className="col s9">
+            <pre>
+              <Highlighter
+                searchWords={this.state.searchWords}
+                textToHighlight={this.state.html}
+              />
+            </pre>
+          </div>
+        </div>
       </div>
     );
   }
