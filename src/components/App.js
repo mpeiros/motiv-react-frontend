@@ -18,8 +18,20 @@ class App extends Component {
     event.preventDefault();
 
     axios.get(`https://serene-wave-14662.herokuapp.com/?url=${this.state.url}`)
-      .then(({ data }) => this.setState({ html: data.html, summary: data.summary, searchWords: [] }))
-      .catch(error => this.setState({ html: 'Invalid URL.', summary: {}, searchWords: [] }));
+      .then(({ data }) => {
+        this.setState({
+          html: data.html,
+          summary: data.summary,
+          searchWords: []
+        });
+      })
+      .catch(error => {
+        this.setState({
+          html: 'Invalid URL. Try with format http://www.example.com', 
+          summary: {},
+          searchWords: []
+        });
+      });
   }
 
   highlightTags({ target }) {
