@@ -43,7 +43,7 @@ class App extends Component {
       return (
         <div className="row valign-wrapper" key={key}>
           <div className="col s7">
-            <button 
+            <button
               className="waves-effect waves-light btn"
               onClick={this.highlightTags.bind(this)}
               value={key}
@@ -52,7 +52,7 @@ class App extends Component {
             </button>
           </div>
           <div className="col s5">
-            {this.state.summary[key]}
+            Count: {this.state.summary[key]}
           </div>
         </div>
       ); 
@@ -73,7 +73,7 @@ class App extends Component {
           <div className="col s3">
             {this.renderSummary()}
           </div>
-          <div className="col s9">
+          <div className="col s9" style={this.state.html === '' ? {} : { border: '1px solid black' }}>
             <pre>
               <code>
                 <Highlighter
