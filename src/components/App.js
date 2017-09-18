@@ -39,7 +39,7 @@ class App extends Component {
 
   render() {
     return (
-      <div>
+      <div className="container">
         <form onSubmit={this.handleSubmit.bind(this)}>
           <label>
             Enter URL:
