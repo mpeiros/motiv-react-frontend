@@ -29,15 +29,19 @@ class App extends Component {
   renderSummary() {
     return Object.keys(this.state.summary).map(key => {
       return (
-        <div key={key}>
-          <button 
-            className="waves-effect waves-light btn"
-            onClick={this.highlightTags.bind(this)}
-            value={key}
-          >
-            {key}
-          </button>
-          {this.state.summary[key]}
+        <div className="row valign-wrapper" key={key}>
+          <div className="col s7">
+            <button 
+              className="waves-effect waves-light btn"
+              onClick={this.highlightTags.bind(this)}
+              value={key}
+            >
+              {key}
+            </button>
+          </div>
+          <div className="col s5">
+            {this.state.summary[key]}
+          </div>
         </div>
       ); 
     });
@@ -48,7 +52,7 @@ class App extends Component {
       <div className="container">
         <div className="row center-align">
           <form onSubmit={this.handleSubmit.bind(this)}>
-            <label>Enter URL:</label>
+            <label>Enter URL (e.g., http://www.google.com)</label>
             <input type="text" value={this.state.url} onChange={this.handleChange.bind(this)} />
             <button className="btn waves-effect waves-light" type="submit">Search</button>
           </form>
