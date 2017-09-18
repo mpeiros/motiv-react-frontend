@@ -27,7 +27,7 @@ class App extends Component {
       })
       .catch(error => {
         this.setState({
-          html: 'Invalid URL. Try with format http://www.example.com', 
+          html: 'Invalid URL. Try with format http(s)://www.example.com', 
           summary: {},
           searchWords: []
         });
@@ -62,9 +62,9 @@ class App extends Component {
   render() {
     return (
       <div className="container">
-        <div className="row center-align">
+        <div className="row center-align" style={{ marginTop: '20px' }}>
           <form onSubmit={this.handleSubmit.bind(this)}>
-            <label>Enter URL (e.g., http://www.google.com)</label>
+            <label style={{ fontSize: '18px' }}>Enter URL Below (e.g., http://www.google.com)</label>
             <input type="text" value={this.state.url} onChange={this.handleChange.bind(this)} />
             <button className="btn waves-effect waves-light" type="submit">Search</button>
           </form>
@@ -75,10 +75,12 @@ class App extends Component {
           </div>
           <div className="col s9">
             <pre>
-              <Highlighter
-                searchWords={this.state.searchWords}
-                textToHighlight={this.state.html}
-              />
+              <code>
+                <Highlighter
+                  searchWords={this.state.searchWords}
+                  textToHighlight={this.state.html}
+                />
+              </code>
             </pre>
           </div>
         </div>
